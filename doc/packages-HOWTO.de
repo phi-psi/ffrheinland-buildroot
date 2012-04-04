@@ -1,0 +1,36 @@
+# Die Makefile ist noch nicht für das Bauen von Paketen vorbereitet. Hier eine
+# schnelle Vorgehensweise:
+
+cd ${ffrheinland-buildroot}
+
+# dies würde die Makefile, wenn sie angepasst wäre:
+cp -p config/trunk.config openwrt/trunk/.config
+rm openwrt/trunk/files
+#+ angepasster Banner und /etc/firmware
+
+cd openwrt/trunk/
+make oldconfig
+make
+
+# nun erhält man ein nacktes OpenWrt zum nie wieder Fläschen. Jetzt noch schnell
+# die Pakete nachbauen:
+
+echo "src-link ffrl $(pwd)/feeds/ffrl" >> openwrt/trunk/feeds.conf
+
+cd openwrt/trunk
+./scripts/feeds update ffrl
+./scripts/feeds install ffrl-miniconfig ffrl-fsm
+
+# Änderungen weise anpassen (beide Pakete einschalten):
+make oldconfig
+
+# und nun wird gebaut:
+make package/feeds/ffrl/ffrl-fsm/compile
+
+# Alternativ kann man sie ja direkt in die Images integrieren ;-)
+# ffrl-fsm hat jedoch noch einen Bug
+
+make
+
+### Frohes Schaffen! ###
+

@@ -1,0 +1,34 @@
+Das paket kann so wie es ist nicht installiert werden.
+
+Einstellungen müssen noch in miniconfig implementiert werden. Alternativ können
+sie auch in der Makefile dieses Pakets verewigt werden.
+
+Error Message:
+ * check_data_file_clashes: Package ffrl-fsm wants to install file /etc/passwd
+	But that file is already provided by package  * base-files
+ * check_data_file_clashes: Package ffrl-fsm wants to install file /etc/rc.local
+	But that file is already provided by package  * base-files
+ * check_data_file_clashes: Package ffrl-fsm wants to install file /etc/config/uhttpd
+	But that file is already provided by package  * uhttpd
+ * check_data_file_clashes: Package ffrl-fsm wants to install file /etc/config/dhcp
+	But that file is already provided by package  * dnsmasq
+ * check_data_file_clashes: Package ffrl-fsm wants to install file /etc/config/system
+	But that file is already provided by package  * base-files
+ * check_data_file_clashes: Package ffrl-fsm wants to install file /etc/config/firewall
+	But that file is already provided by package  * firewall
+ * check_data_file_clashes: Package ffrl-fsm wants to install file /etc/config/dhcp6s
+	But that file is already provided by package  * wide-dhcpv6-server
+ * check_data_file_clashes: Package ffrl-fsm wants to install file /etc/config/batman-adv
+	But that file is already provided by package  * kmod-batman-adv
+ * check_data_file_clashes: Package ffrl-fsm wants to install file /etc/config/radvd
+	But that file is already provided by package  * radvd
+ * check_data_file_clashes: Package ffrl-fsm wants to install file /etc/sysupgrade.conf
+	But that file is already provided by package  * base-files
+ * check_data_file_clashes: Package ffrl-fsm wants to install file /etc/firewall.user
+	But that file is already provided by package  * firewall
+ * check_data_file_clashes: Package ffrl-fsm wants to install file /etc/init.d/dnsmasq
+	But that file is already provided by package  * dnsmasq
+ * check_data_file_clashes: Package ffrl-fsm wants to install file /etc/init.d/n2n
+	But that file is already provided by package  * n2n
+ * opkg_install_cmd: Cannot install package ffrl-fsm.
+
