@@ -1,34 +1,47 @@
-# Die Makefile ist noch nicht für das Bauen von Paketen vorbereitet. Hier eine
-# schnelle Vorgehensweise:
+* ffj feed (Freifunk Jena)
+
+- udp-broadcast
+  Send UDP based broadcast messages and process them using the included demon.
+
+
+* ffrl feed (Freifunk Rheinland)
+
+- ffrl-miniconfig
+  Ein Skript, welches den Router für eine Freifunk Rheinland Freifunkzelle
+  umkonfiguriert.
+
+- ffrl-fsm
+  Die Jenaer Finite-State Machine umkonfiguriert für Freifunk Rheinland
+
+# Die Makefile ist schon für das Bauen von Paketen vorbereitet. Hier eine
+# schnelle Anleitung, wenn man sie selbst nachbauen möchte:
 
 cd ${ffrheinland-buildroot}
 
-# dies würde die Makefile, wenn sie angepasst wäre:
-cp -p config/trunk.config openwrt/trunk/.config
+cp -p config/&{configflavour}.config openwrt/trunk/.config
 rm openwrt/trunk/files
 #+ angepasster Banner und /etc/firmware
 
 cd openwrt/trunk/
 make oldconfig
-make
+make # nun erhält man ein nacktes OpenWrt zum nie wieder Fläschen.
 
-# nun erhält man ein nacktes OpenWrt zum nie wieder Fläschen. Jetzt noch schnell
-# die Pakete nachbauen:
-
+# Feeds-Datei anpassen
+cd ${ffrheinland-buildroot}
 echo "src-link ffrl $(pwd)/feeds/ffrl" >> openwrt/trunk/feeds.conf
 
+# Feeds Update
 cd openwrt/trunk
 ./scripts/feeds update ffrl
 ./scripts/feeds install ffrl-miniconfig ffrl-fsm
 
-# Änderungen weise anpassen (beide Pakete einschalten):
+# Änderungen weise anpassen (Pakete einschalten):
 make oldconfig
 
 # und nun wird gebaut:
 make package/feeds/ffrl/ffrl-fsm/compile
 
 # Alternativ kann man sie ja direkt in die Images integrieren ;-)
-# ffrl-fsm hat jedoch noch einen Bug
 
 make
 
