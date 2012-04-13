@@ -9,7 +9,7 @@ include $(TOPDIR)/rules.mk
 
 
 PKG_NAME:=ffrl-n2n
-PKG_VERSION:=0.0.20120412
+PKG_VERSION:=0.0.3875.20120414
 PKG_RELEASE:=1
 #PKG_REV:=
 
@@ -22,7 +22,7 @@ define Package/ffrl-n2n
   SECTION:=ffrl
   CATEGORY:=Network
   TITLE:=Freifunk Rheinland - n2n init script
-  DEPENDS:=+base-files
+  DEPENDS:=+base-files +n2n
   URL:=http://www.freifunk-rheinland.net
   DEFAULT:=n
   PKGARCH:=all
