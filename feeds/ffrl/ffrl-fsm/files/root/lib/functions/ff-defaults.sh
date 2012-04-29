@@ -3,7 +3,7 @@
 
 ffdef_set_interface_wlan() {
 	local ifname=$1
-	uci batch << EOF
+	uci batch <<EOF
 set network.wlan='interface'
 set network.wlan.ifname='$ifname'
 set network.wlan.mtu='1528'
@@ -22,3 +22,5 @@ set network.mesh.proto='none'
 set network.mesh.auto='1'
 EOF
 }
+
+
