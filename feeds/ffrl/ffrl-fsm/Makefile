@@ -7,14 +7,9 @@
 
 include $(TOPDIR)/rules.mk
 
-
 PKG_NAME:=ffrl-fsm
-PKG_VERSION:=0.0.20120404
+PKG_VERSION:=0.0.20120509
 PKG_RELEASE:=1
-#PKG_REV:=
-
-#PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
-#PKG_BUILD_DEPENDS := uci base-files
 
 include $(INCLUDE_DIR)/package.mk
 
@@ -23,7 +18,10 @@ define Package/ffrl-fsm
   CATEGORY:=Network
   SUBMENU:=Freifunk Rheinland
   TITLE:=Finite-state machine for Freifunk Rheinland
-  DEPENDS:=+base-files +ffrl-miniconfig
+  DEPENDS:=+base-files +kmod-batman-adv +flock +n2n +udp-broadcast +radvd \
+	+wide-dhcpv6-server +iptables-mod-conntrack-extra \
+	+iptables-mod-conntrack-extra +iptables-mod-filter +iptables-mod-ipp2p \
+	+iptables-mod-nat-extra	+ip6tables iperf-mt +l7-protocols +ffrl-webui
   URL:=http://www.freifunk-rheinland.net
   DEFAULT:=n
   PKGARCH:=all
