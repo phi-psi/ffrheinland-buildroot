@@ -1,0 +1,483 @@
+#!/bin/bash
+#
+# makeconf - creates OpenWrt config files for Freifunk nodes
+# Copyright (C) 2012  Philipp Psurek <phip@vmail.me>
+#
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later
+# version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+# details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this program.  If not, see <http://www.gnu.org/licenses/>.
+
+version="0.0.20120618"
+
+version(){
+echo "makeconf v${version}"
+
+cat << EOF
+Copyright © 2012 Philipp Psurek <phip@vmail.me>
+Lizenz GPLv3+: GNU GPL Version 3 oder höher <http://gnu.org/licenses/gpl.html>
+Dies ist freie Software: Sie können sie ändern und weitergeben.
+Es gibt keinerlei Garantien, soweit wie es das Gesetz erlaubt.
+EOF
+}
+
+usage(){
+cat << EOF
+Aufruf: makeconf <FF-Zelle> <Platform> <config>
+        makeconf <Option>
+
+Config:
+  batman
+  cloud
+  n2n
+  wireless
+
+Optionen:
+  -h, --help        Hilfe
+  -v, --version     Version
+
+EOF
+
+#list_com
+}
+
+# Konfigurierbare Freifunk-Zellen
+cells(){
+cells="ffrl ac d du kr mg ne gmrv sg w"
+}
+
+# ------------------------------------------------------------------------------
+# Konfigurationsdaten der Freifunk-Zellen
+# ------------------------------------------------------------------------------
+cell_ffrl(){
+name="Rheinland"
+com='ffrl'
+channel=5
+batssid=FFRL-BATBONE
+bssid=02:CA:FF:EE:FF:FF
+subnet="10.0.0.0/16"
+ip6ula="fda0:747e:ab29:ff::/64"
+ssid1="www.freifunk-rheinland.net"
+n2n=none
+}
+
+cell_ac(){
+name="Aachen"
+com='ffac'
+channel=1
+batssid=FFAC-BATBONE
+bssid=12:ca:ff:ee:ba:be
+subnet="10.90.0.0/16"
+ip6ula="fda0:747e:ab29:ffac::/64"
+ssid1="www.freifunk-rheinland.net"
+n2n=ffrln2n1
+}
+
+cell_d(){
+name="Düsseldorf"
+com='ffddorf'
+channel=3
+batssid=batman.duesseldorf.freifunk.net
+bssid=02:CA:FF:EE:BA:BE
+subnet="10.40.0.0/16"
+ip6ula="fda0:747e:ab29:cafe::/64"
+ssid1="www.freifunk-rheinland.net"
+n2n=ffrln2n
+}
+
+cell_du(){
+name="Duisburg"
+com='ffduisburg'
+channel=1
+batssid=FFDU-BATBONE
+bssid=02:CA:FF:EE:02:03
+subnet="10.71.0.0/16"
+ip6ula="fda0:747e:ab29:203::/64"
+ssid1="www.freifunk-rheinland.net"
+n2n=ffrln2n
+}
+
+cell_kr(){
+name="Krefeld"
+com='ffkrefeld'
+channel=1
+batssid=batman.krefeld.freifunk.net
+bssid=12:CA:FF:EE:BA:BE
+subnet="10.41.0.0/16"
+ip6ula="fda0:747e:ab29:babe::/64"
+ssid1="www.freifunk-rheinland.net"
+n2n=ffrln2n
+}
+
+cell_mg(){
+name="Mönchengladbach"
+com='ffmgladbach'
+channel=1
+batssid=FFMG-BATBONE
+bssid=02:CA:FF:EE:21:61
+subnet="10.140.0.0/16"
+ip6ula="fda0:747e:ab29:2161::/64"
+ssid1="www.freifunk-rheinland.net"
+n2n=ffrln2n
+}
+
+cell_ne (){
+name="Neuss"
+com='ffneuss'
+channel=11
+batssid=batman.neuss.freifunk.net
+bssid=B2:CA:FF:EE:BA:BE
+subnet="10.28.0.0/16"
+ip6ula="fda0:747e:ab29:beef::/64"
+ssid1="www.freifunk-rheinland.net"
+n2n=ffrln2n
+}
+
+cell_gmrv(){
+name="Radevormwald (Oberbergischer Kreis)"
+com='ffrade'
+channel=1
+batssid=FFRV-BATBONE
+bssid=02:CA:FF:EE:21:95
+subnet="10.57.0.0/16"
+ip6ula="fda0:747e:ab29:2195::/64"
+ssid1="Freifunk Radevormwald"
+ssid2="www.freifunk-rheinland.net"
+n2n=ffrln2n1
+}
+
+cell_sg(){
+name="Solingen"
+com='ffsolingen'
+channel=11
+batssid=batman.solingen.freifunk.net
+bssid=02:40:00:43:43:43
+subnet="10.7.0.0/16"
+ip6ula="fda0:747e:ab29:dead::/64"
+ssid1="www.freifunk-rheinland.net"
+n2n=ffrln2n
+}
+
+cell_w(){
+name="Wuppertal"
+com='ffwtal'
+channel=11
+batssid=FFW-BATBONE
+bssid=02:CA:FF:EE:E1:BA
+subnet="10.3.0.0/16"
+ip6ula="fda0:747e:ab29:e1ba::/64"
+ssid1="www.freifunk-wuppertal.net"
+ssid2="www.freifunk-rheinland.net"
+n2n=ffrln2n1
+}
+
+# ------------------------------------------------------------------------------
+# n2n Konfigurationsdaten 
+# ------------------------------------------------------------------------------
+n2n_ffrln2n(){
+amount='2'
+n2n1='fnordeingang.de'
+port1='31337'
+n2n2='78.47.181.173'
+port2='31337'
+}
+
+n2n_ffrln2n1(){
+amount='1'
+n2n1='fnordeingang.de'
+port1='31337'
+}
+
+n2n_none(){
+amount='0'
+}
+
+# ------------------------------------------------------------------------------
+# ein paar Funktionen
+# ------------------------------------------------------------------------------
+get_systemtype(){
+# D-Link DIR-300
+if [ "$PLAT" == "atheros" ]; then
+  wifiif="ath"
+  wifitype="atheros"
+  wificountry="276"
+
+# Linksys WRT54G
+# TP-LINK und andere
+else
+  wifiif="wlan"
+  wifitype="mac80211"
+  wificountry="DE"
+fi
+}
+
+val_wifiIF(){
+if [ "${PLAT}" == "atheros" ]
+then
+#wifiIF=athwifi
+wifiIF=ath
+else
+wifiIF=wlan
+fi
+
+#TODO
+if [ "$ssid3" != "" ]; then batmanIF=${wifiIF}0-3
+elif [ "$ssid2" != "" ]; then batmanIF=${wifiIF}0-2
+elif [ "$ssid1" != "" ]; then batmanIF=${wifiIF}0-1
+else batmanIF=${wifiIF}0
+fi
+}
+
+# ------------------------------------------------------------------------------
+# Statische, modifizierbare Konfigs
+# ------------------------------------------------------------------------------
+conf_batman(){
+val_wifiIF
+cat << EOF
+config 'mesh' 'bat0'
+	option 'interfaces' '${batmanIF}'
+	option 'aggregated_ogms'
+	option 'ap_isolation'
+	option 'bonding'
+	option 'fragmentation'
+	option 'gw_bandwidth'
+	option 'gw_mode' 'client'
+	option 'gw_sel_class'
+	option 'log_level'
+	option 'orig_interval'
+	option 'vis_mode'
+EOF
+}
+
+conf_cloud(){
+cat << EOF
+config cloud cur
+	option net_robinson '21.0.0.0/8'
+	option net_fake '22.0.0.0/8'
+	option net_mesh '${subnet}'
+	option net_ip6ula '${ip6ula}'
+EOF
+}
+
+conf_n2n(){
+n2n_${n2n}
+n2namount=$amount
+i=1
+
+while [  $i -le $n2namount ]; do
+let j=i-1
+
+eval supernode='$'n2n${i}
+eval port='$'port${i}
+
+cat << EOF
+config edge
+	option ipaddr '1.2.3.4'
+	option supernode '${supernode}'
+	option port '${port}'
+	option community '${com}${i}'
+	option key '${com}${i}'
+	option devname 'n2n${i}'
+	option route ''
+EOF
+let i=i+1
+done
+}
+
+conf_wireless(){
+# TODO
+AP=true
+
+if [ $PLAT = "atheros" ]
+then conf_wireless_atheros
+else conf_wireless_ar71xx
+fi
+
+echo "##### Konfiguration erstellt von makeconf v${version} #####"
+
+# B.A.T.M.A.N.-adv Schnittstelle
+cat << EOF
+config wifi-iface
+	option device radio0
+	option mode adhoc
+	option ssid $batssid
+	option bssid $bssid
+	option hidden 0
+	option encryption none
+EOF
+
+# Für Knoten mit Fähigkeiten für mehrere SSIDs
+if $($AP); then
+# Accesspoint SSID
+if [[ "${ssid1}" != "" ]]; then
+cat << EOF
+config wifi-iface
+	option device 'radio0'
+	option network 'mesh'
+	option mode 'ap'
+	option ssid 'www.freifunk-rheinland.net'
+	option encryption 'none'
+	option wmm '0'
+EOF
+fi
+
+# Weitere SSIDs der Zelle
+if [[ "${ssid2}" != "" ]]; then
+cat << EOF
+config wifi-iface
+	option device 'radio0'
+	option network 'mesh'
+	option mode 'ap'
+	option ssid '${ssid2}'
+	option encryption 'none'
+	option wmm '0'
+EOF
+fi
+
+# SSID des Knotenbetreibers
+if [[ "${ssid3}" != "" ]]; then
+cat << EOF
+config wifi-iface
+	option device 'radio0'
+	option network 'mesh'
+	option mode 'ap'
+	option ssid '${ssid3}'
+	option encryption 'none'
+	option wmm '0'
+EOF
+fi
+fi # Ende für Knoten mit Fähigkeiten für mehrere SSIDs
+}
+
+#TODO
+conf_wireless_atheros(){
+cat << EOF
+config wifi-device 'radio0'
+	option type 'atheros'
+	option channel '11'
+#	option macaddr ''
+	option txpower '20'
+	option country '276'
+	option disabled '0'
+EOF
+}
+
+#TODO
+conf_wireless_ar71xx(){
+# "config wifi-device radio0" macht der Router automatisch ;–)
+# TODO würde er ... wenn wir nicht wären
+
+# TODO deaktiviert
+cat > /dev/null << EOF
+config wifi-device 'radio0'
+	option type 'mac80211'
+	option channel ${channel}
+#	option macaddr ''
+	option hwmode '11ng'
+	option htmode 'HT20'
+	list ht_capab 'SHORT-GI-40'
+	list ht_capab 'DSSS_CCK-40'
+	option phy 'phy0'
+	option txpower '20'
+	option country 'DE'
+	option disabled '0'
+EOF
+# TODO deaktiviert
+
+# unsere gute, alte Config
+cat << EOF
+config wifi-device radio0
+	option type	mac80211
+	option channel	${channel}
+	option phy	phy0
+	option txpower	20
+	option country	DE
+#	option hwmode	11ng
+#	option htmode	HT20
+#	list ht_capab	SHORT-GI-40
+#	list ht_capab	TX-STBC
+#	list ht_capab	RX-STBC1
+#	list ht_capab	DSSS_CCK-40
+EOF
+}
+
+# ------------------------------------------------------------------------------
+# Skriptablauf
+# ------------------------------------------------------------------------------
+runscript(){
+cell_${cell} 2> /dev/null || defcell
+conf_${conf}
+}
+
+# Kompatibilitätsebene für FF-Buildroot
+defcell(){
+case "$cell" in
+  aachen)
+  cell=ac
+  ;;
+  duesseldorf)
+  cell=d
+  ;;
+  duisburg)
+  cell=du
+  ;;
+  krefeld)
+  cell=kr
+  ;;
+  moenchengladbach)
+  cell=mg
+  ;;
+  neuss)
+  cell=ne
+  ;;
+  radevormwald)
+  cell=gmrv
+  ;;
+  solingen)
+  cell=sg
+  ;;
+  wuppertal)
+  cell=w
+  ;;
+*)
+  echo "nicht implementierte FF-Zelle"
+  usage
+  exit 1
+  ;;
+esac
+
+cell_${cell} || defcell
+}
+
+# Eingabeverarbeitung
+cell=$1
+PLAT=$2
+conf=$3
+
+if [ "$cell" != "" ]; then
+  case "$cell" in
+  --help|-h)
+    usage
+    exit 0
+    ;;
+  --version|-v)
+    version
+    exit 0
+    ;;
+  *)
+    runscript
+    ;;
+  esac
+else
+  usage
+  exit 1
+fi
+
