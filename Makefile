@@ -40,8 +40,16 @@ define move_files
 cp -a files/common openwrt/$(REPO)/files
 [ -d files/$(REPO)/$(PLAT) ] \
 	&& rsync -a files/$(REPO)/$(PLAT)/ openwrt/$(REPO)/files/
-[ -d files/$(REPO)/$(PLAT)-$(MODEL) ] \
-	&& rsync -a files/$(REPO)/$(PLAT)-$(MODEL)/ openwrt/$(REPO)/files/
+#[ -d files/$(REPO)/$(PLAT)-$(MODEL) ] \
+#	&& rsync -a files/$(REPO)/$(PLAT)-$(MODEL)/ openwrt/$(REPO)/files/
+endef
+
+define gen_config
+[ -d openwrt/$(REPO)/files/etc/config ] || mkdir openwrt/$(REPO)/files/etc/config
+./makeconf $(MODEL) $(PLAT) batman   > openwrt/$(REPO)/files/etc/config/batman-adv
+./makeconf $(MODEL) $(PLAT) wireless > openwrt/$(REPO)/files/etc/config/wireless
+./makeconf $(MODEL) $(PLAT) n2n      > openwrt/$(REPO)/files/etc/config/n2n
+./makeconf $(MODEL) $(PLAT) cloud    > openwrt/$(REPO)/files/etc/config/cloud
 endef
 
 define create_firmware_file
@@ -346,8 +354,9 @@ images/%: MODEL=$(shell echo $(@F) | cut -f1 -d-)
 images/%: openwrt/$$(REPO)/.repo_access 
 	@echo '  BUILD   OpenWrt $(REPO) for $(PLAT) in $(MODEL)'
 	./genconfig $(PLAT) > openwrt/$(REPO)/.config
-	-rm -r openwrt/$(REPO)/files
+	-rm -r openwrt/$(REPO)/files 2> /dev/null || true
 	$(move_files)
+	$(gen_config)
 	$(create_firmware_file)
 	$(brand_firmware)
 	$(oldconfig)
