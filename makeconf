@@ -347,6 +347,7 @@ cat << EOF
 config wifi-iface
 	option device radio0
 	option mode adhoc
+	option network adhoc
 	option ssid $batssid
 	option bssid $bssid
 	option hidden 0
