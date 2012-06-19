@@ -44,7 +44,7 @@ merge_file () {
 merge_dir () {
     if [ -d $2 ]; then
 	$quiet || echo "from directory $2"
-	find $2 -printf "%P\n" | grep -v '^$' | filter_suffix | sort -u | (
+	find -H $2 -printf "%P\n" | grep -v '^$' | filter_suffix | sort -u | (
 	    while read f; do
 		if [ -d "$2/$f" ]; then
 		    mkdir -p "$1/$f"
