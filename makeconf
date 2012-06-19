@@ -51,7 +51,7 @@ EOF
 
 # Konfigurierbare Freifunk-Zellen
 cells(){
-cells="ffrl ac d du kr mg ne gmrv sg w"
+cells="ffrl ac d du kr j mg ne gmrv peg sg w"
 }
 
 # ------------------------------------------------------------------------------
@@ -117,6 +117,18 @@ ssid1="www.freifunk-rheinland.net"
 n2n=ffrln2n
 }
 
+cell_j(){
+name="Jena"
+com='ffj'
+channel=1
+batssid=batman.freifunk-jena.de
+bssid=12:CA:FF:EE:BA:BE
+subnet="10.17.0.0/16"
+ip6ula="fda0:747e:ab29:ff1::/64"
+ssid1="www.freifunk-jena.de"
+n2n=ffrln2n
+}
+
 cell_mg(){
 name="Mönchengladbach"
 com='ffmgladbach'
@@ -152,6 +164,19 @@ ip6ula="fda0:747e:ab29:2195::/64"
 ssid1="Freifunk Radevormwald"
 ssid2="www.freifunk-rheinland.net"
 n2n=ffrln2n1
+}
+
+cell_peg(){
+name="Pegnitz"
+com='ffpegde'
+channel=1
+batssid=batman.pegnitz.freifunk.net
+bssid=44:03:DE:AD:BE:EF
+subnet="44.3.0.0/16"
+ip6ula="fda0:747e:ab29:4403::/64"
+ssid1="pegnitz.freifunk.net"
+#ssid2="Freifunk Pegnitz"
+n2n=ffpegde
 }
 
 cell_sg(){
@@ -194,6 +219,20 @@ n2n_ffrln2n1(){
 amount='1'
 n2n1='fnordeingang.de'
 port1='31337'
+}
+
+n2n_ffpegde(){
+amount='1'
+n2n1='freifunk.f3l.de'
+port1='31337'
+}
+
+n2n_ffj(){
+amount='2'
+n2n1='fritz-der-server.de'
+port1='2009'
+n2n2='89.238.83.22'
+port2='9876'
 }
 
 n2n_none(){
@@ -446,6 +485,13 @@ case "$cell" in
   ;;
   wuppertal)
   cell=w
+  ;;
+#----
+  pegnitz)
+  cell=peg
+  ;;
+  jena)
+  cell=j
   ;;
 *)
   echo "nicht implementierte FF-Zelle"
