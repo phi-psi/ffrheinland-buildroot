@@ -21,7 +21,7 @@ EOF
     if $auto && have_internet; then
 	# geolocate may fail (e.g. if another instance was running or
 	# the position could not be determined)
-	/sbin/geolocate || true
+	/usr/sbin/geolocate || true
         # close previously aquired lock
 	exec 667>&-
     fi
