@@ -292,7 +292,7 @@ EOF
 cat << EOF
 CONFIG_PACKAGE_ffrl-fsm=
 CONFIG_PACKAGE_ffrl-geolocate=
-CONFIG_PACKAGE_ffrl-p2ptable=
+CONFIG_PACKAGE_ffrl-p2ptbl=
 CONFIG_PACKAGE_ffrl-shuf=
 EOF
 }
