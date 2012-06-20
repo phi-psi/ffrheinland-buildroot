@@ -99,14 +99,6 @@ info:
 	@echo "	 Version: $(VERSION)"
 	@echo "	    Date: $(DATE)"
 	@echo ''
-	@echo "Freifunk Jena hbbpd"
-	@echo "	 Version: $(FFJVERSION)"
-	@echo "	    Date: $(FFJDATE)"
-	@echo ''
-	@echo "OpenWrt"
-	@echo "	Backfire: $(BACKFIREVERSION)"
-	@echo "	   Trunk: r$(SVNREVISION)"
-	@echo ''
 	@echo ' To see a list of typical targets execute "make help"'
 	@echo ' More info can be located in ./README'
 
@@ -144,8 +136,6 @@ openwrt/backfire/.repo_access:
 	@echo '  UPDATE  OpenWrt Backfire $(BACKFIREVERSION) feeds'
 	cat $(@D)/feeds.conf.default feeds.conf > $(@D)/feeds.conf
 	cd $(@D) && ./scripts/feeds update > /dev/null 2&>1
-	@echo '  INSTALL Freifunk Jena hbbpd $(FFJVERSION) in OpenWrt Backfire'
-	cd $(@D) && ./scripts/feeds install -a -p ffj > /dev/null 2&>1
 	@echo '  INSTALL Freifunk Rheinland packages in OpenWrt Trunk'
 	cd $(@D) && ./scripts/feeds install -a -p ffrl > /dev/null 2&>1
 	@echo '  LINK    OpenWrt Backfire $(BACKFIREVERSION) packages'
@@ -161,8 +151,6 @@ openwrt/trunk/.repo_access:
 	@echo '  UPDATE  OpenWrt Trunk r$(SVNREVISION) feeds'
 	cat $(@D)/feeds.conf.default feeds.conf > $(@D)/feeds.conf
 	cd $(@D) && ./scripts/feeds update > /dev/null 2&>1
-	@echo '  INSTALL Freifunk Jena hbbpd $(FFJVERSION) in OpenWrt Trunk'
-	cd $(@D) && ./scripts/feeds install -a -p ffj > /dev/null 2&>1
 	@echo '  INSTALL Freifunk Rheinland packages in OpenWrt Trunk'
 	cd $(@D) && ./scripts/feeds install -a -p ffrl > /dev/null 2&>1
 	@echo '  LINK    OpenWrt Trunk r$(SVNREVISION) packages'
@@ -198,8 +186,6 @@ openwrt/backfire/.update:
 	@echo '  UPDATE  OpenWrt Backfire $(BACKFIREVERSION) feeds'
 	cat $(@D)/feeds.conf.default feeds.conf > $(@D)/feeds.conf
 	cd $(@D) && ./scripts/feeds update > /dev/null 2&>1
-	@echo '  INSTALL Freifunk Jena hbbpd $(FFJVERSION) (update)'
-	cd $(@D) && ./scripts/feeds install -a -p ffj > /dev/null 2&>1
 	@echo '  INSTALL Freifunk Rheinland packages in OpenWrt Trunk'
 	cd $(@D) && ./scripts/feeds install -a -p ffrl > /dev/null 2&>1
 	@echo '  LINK    OpenWrt Backfire $(BACKFIREVERSION) packages'
@@ -214,8 +200,6 @@ openwrt/trunk/.update:
 	@echo '  UPDATE  OpenWrt Trunk r$(SVNREVISION) feeds'
 	cat $(@D)/feeds.conf.default feeds.conf > $(@D)/feeds.conf
 	cd $(@D) && ./scripts/feeds update > /dev/null 2&>1
-	@echo '  INSTALL Freifunk Jena hbbpd $(FFJVERSION) (update)'
-	cd $(@D) && ./scripts/feeds install -a -p ffj > /dev/null 2&>1
 	@echo '  INSTALL Freifunk Rheinland packages in OpenWrt Trunk'
 	cd $(@D) && ./scripts/feeds install -a -p ffrl > /dev/null 2&>1
 	@echo '  LINK    OpenWrt Trunk r$(SVNREVISION) packages'
