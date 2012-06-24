@@ -1,0 +1,16 @@
+#!/bin/sh
+# post-removal script.
+
+echo "+ removing ffrl-fsm-inetable from crontab"
+sed \
+  -e "\/tmp\/p2ptbl\/ccfg_wifi/d" \
+  -e "\/usr\/sbin\/splash_sync/d" \
+  -e "/\/usr\/sbin\/fsm watch inetable/d" \
+  -e "/\/tmp\/p2ptbl\/gwip/d" \
+  -i "${IPKG_INSTROOT}/etc/crontabs/root"
+
+if [ -z "${IPKG_INSTROOT}" ]; then
+  echo "+ restarting cron"
+  /etc/init.d/cron restart
+fi
+

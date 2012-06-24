@@ -1,0 +1,33 @@
+#!/bin/sh
+# post-install script.
+
+if [ ! -f "${IPKG_INSTROOT}/etc/crontabs/root" ]; then
+  echo "+ crontab 'root' not found, creating file"
+  touch "${IPKG_INSTROOT}/etc/crontabs/root"
+
+  if [ -z "${IPKG_INSTROOT}" ]; then
+    echo "+ enabling cron"
+    /etc/init.d/cron enable
+  fi
+fi
+
+echo "+ adding ffrl-fsm-inetable to crontab"
+
+sed \
+  -e "\/tmp\/p2ptbl\/ccfg_wifi/d" \
+  -e "\/usr\/sbin\/splash_sync/d" \
+  -e "/\/usr\/sbin\/fsm watch inetable/d" \
+  -e "/\/tmp\/p2ptbl\/gwip/d" \
+  -i "${IPKG_INSTROOT}/etc/crontabs/root"
+
+echo "*/2 * * * * /usr/sbin/fsm watch inetable
+*/1 * * * * /usr/sbin/p2ptbl gossip /tmp/p2ptbl/gwip      500 br-mesh
+* * * * */10 /usr/sbin/p2ptbl gossip /tmp/p2ptbl/ccfg_wifi 500 br-mesh
+*/1 * * * * /usr/sbin/splash_sync" \
+  >> "${IPKG_INSTROOT}/etc/crontabs/root"
+
+if [ -z "${IPKG_INSTROOT}" ]; then
+  echo "+ restarting cron"
+  /etc/init.d/cron restart
+fi
+
