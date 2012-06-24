@@ -33,8 +33,8 @@ define Package/ffrl-p2ptbl
   PKGARCH:=all
   DEFAULT:=n
   TITLE:=lightweight distributed key-value store
-# MAINTAINER:=Jan Huwald <jh@sotun.de>
-# URL:=http://code.sotun.de/git/ffj/p2ptbl
+# MAINTAINER:=
+  URL:=https://freifunk-rheinland.net/wiki/index.php/Firmwarebeschreibung
   DEPENDS:=+ffrl-shuf +hbbp +coreutils +coreutils-join
 endef
 
@@ -42,6 +42,12 @@ define Package/ffrl-p2ptbl/description
 	P2P tables are a lightweight distributed key-value store with
 	built-in collision arbitration. Eventual consistency is maintained
 	using a HBBP-based gossip protocol.
+endef
+
+define Build/Prepare
+endef
+
+define Build/Configure
 endef
 
 define Build/Compile

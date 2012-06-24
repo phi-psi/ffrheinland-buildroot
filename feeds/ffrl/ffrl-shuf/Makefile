@@ -33,14 +33,20 @@ define Package/ffrl-shuf
   PKGARCH:=all
   DEFAULT:=n
   TITLE:=shuffle lines
-# MAINTAINER:=Jan Huwald <jh@sotun.de>
-# URL:=http://code.sotun.de/git/ffj/shuf
+# MAINTAINER:=
+  URL:=https://freifunk-rheinland.net/wiki/index.php/Firmwarebeschreibung
   DEPENDS:=@(!PACKAGE_coreutils-shuf)
 endef
 
 define Package/ffrl-shuf/description
 	awk-based variant of coreutils-shuf without any of the original
 	command-line parameters
+endef
+
+define Build/Prepare
+endef
+
+define Build/Configure
 endef
 
 define Build/Compile

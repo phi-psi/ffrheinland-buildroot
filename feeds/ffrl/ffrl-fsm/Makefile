@@ -33,14 +33,20 @@ define Package/ffrl-fsm
   PKGARCH:=all
   DEFAULT:=n
   TITLE:=Finite State Machine Interpreter
-# MAINTAINER:=Jan Huwald <jh@sotun.de>
-# URL:=http://code.sotun.de/git/ffj/fsm
+# MAINTAINER:=
+  URL:=https://freifunk-rheinland.net/wiki/index.php/Firmwarebeschreibung
   DEPENDS:=+flock
 endef
 
 define Package/ffrl-fsm/description
 	Allows to implement FSMs using sets of executables (typically
 	shell scripts)
+endef
+
+define Build/Prepare
+endef
+
+define Build/Configure
 endef
 
 define Build/Compile

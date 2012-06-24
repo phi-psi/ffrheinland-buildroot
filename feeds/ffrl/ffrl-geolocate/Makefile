@@ -33,14 +33,20 @@ define Package/ffrl-geolocate
   PKGARCH:=all
   DEFAULT:=n
   TITLE:=Learn device location using wifi neighbours
-# MAINTAINER:=Jan Huwald <jh@sotun.de>
-# URL:=http://code.sotun.de/git/ffj/ffrl-geolocate
+# MAINTAINER:=
+  URL:=https://freifunk-rheinland.net/wiki/index.php/Firmwarebeschreibung
   DEPENDS:=uci
 endef
 
 define Package/ffrl-geolocate/description
 	Send the neighbouring wifi networks to google and get the
 	geolocation in return. The result is stored via UCI.
+endef
+
+define Build/Prepare
+endef
+
+define Build/Configure
 endef
 
 define Build/Compile
