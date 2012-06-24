@@ -1,0 +1,13 @@
+#!/bin/sh
+# post-removal script.
+
+echo "+ removing ffrl-splash from crontab"
+sed \
+  -e "/\/tmp\/p2ptbl\/splash/d" \
+  -i "${IPKG_INSTROOT}/etc/crontabs/root"
+
+if [ -z "${IPKG_INSTROOT}" ]; then
+  echo "+ restarting cron"
+  /etc/init.d/cron restart
+fi
+
