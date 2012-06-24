@@ -17,7 +17,7 @@
 # this program.  If not, see <http://www.gnu.org/licenses/>.
 
 version(){
-echo "genconfig Version 0.0.20120618"
+echo "genconfig Version 0.0.20120624"
 
 cat << EOF
 Copyright © 2012 Philipp Psurek <phip@vmail.me>
@@ -286,6 +286,14 @@ cat << EOF
 CONFIG_PACKAGE_hbbp=
 CONFIG_PACKAGE_nacl=
 CONFIG_PACKAGE_kmod-nfnetlink=
+
+CONFIG_PACKAGE_ffrl-fsm=
+CONFIG_PACKAGE_ffrl-fsm-inetable=
+CONFIG_PACKAGE_ffrl-fsm-update=
+CONFIG_PACKAGE_ffrl-geolocate=
+CONFIG_PACKAGE_ffrl-p2ptbl=
+CONFIG_PACKAGE_ffrl-shuf=
+CONFIG_PACKAGE_ffrl-splash=
 EOF
 }
 
