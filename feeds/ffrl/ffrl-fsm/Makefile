@@ -32,7 +32,7 @@ define Package/ffrl-fsm
   SUBMENU:=Freifunk Rheinland
   PKGARCH:=all
   DEFAULT:=n
-  TITLE:=Finite State Machine Interpreter
+  TITLE:=Finite-state machine interpreter
 # MAINTAINER:=
   URL:=https://freifunk-rheinland.net/wiki/index.php/Firmwarebeschreibung
   DEPENDS:=+flock
