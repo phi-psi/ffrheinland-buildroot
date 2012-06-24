@@ -1,0 +1,29 @@
+#!/bin/sh
+# post-install script.
+
+if [ ! -f "${IPKG_INSTROOT}/etc/crontabs/root" ]; then
+  echo "+ crontab 'root' not found, creating file"
+  touch "${IPKG_INSTROOT}/etc/crontabs/root"
+
+  if [ -z "${IPKG_INSTROOT}" ]; then
+    echo "+ enabling cron"
+    /etc/init.d/cron enable
+  fi
+fi
+
+echo "+ adding ffrl-fsm-update to crontab"
+
+sed \
+  -e "/\/usr\/sbin\/fsm watch update/d" \
+  -e "/\/tmp\/p2ptbl\/update/d" \
+  -i "${IPKG_INSTROOT}/etc/crontabs/root"
+
+echo "*/5 * * * * /usr/sbin/fsm watch update
+*/5 * * * * /usr/sbin/p2ptbl gossip /tmp/p2ptbl/update    500 br-mesh" \
+  >> "${IPKG_INSTROOT}/etc/crontabs/root"
+
+if [ -z "${IPKG_INSTROOT}" ]; then
+  echo "+ restarting cron"
+  /etc/init.d/cron restart
+fi
+

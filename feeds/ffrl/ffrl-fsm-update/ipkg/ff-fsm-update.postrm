@@ -1,0 +1,14 @@
+#!/bin/sh
+# post-removal script.
+
+echo "+ removing ffrl-fsm-update from crontab"
+sed \
+  -e "/\/usr\/sbin\/fsm watch update/d" \
+  -e "/\/tmp\/p2ptbl\/update/d" \
+  -i "${IPKG_INSTROOT}/etc/crontabs/root"
+
+if [ -z "${IPKG_INSTROOT}" ]; then
+  echo "+ restarting cron"
+  /etc/init.d/cron restart
+fi
+
