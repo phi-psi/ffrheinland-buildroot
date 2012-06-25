@@ -301,6 +301,9 @@ EOF
 packages_ffrl_util(){
 cat << EOF
 CONFIG_PACKAGE_ffrl-miniconfig=
+
+CONFIG_PACKAGE_ffrl-key-lcb=
+CONFIG_PACKAGE_ffrl-key-phip=
 EOF
 }
 
