@@ -40,11 +40,9 @@ define move_files
 cp -a files/common openwrt/$(REPO)/files
 [ -d files/$(REPO)/$(PLAT) ] \
 	&& rsync -a files/$(REPO)/$(PLAT)/ openwrt/$(REPO)/files/
-#[ -d files/$(REPO)/$(PLAT)-$(MODEL) ] \
-#	&& rsync -a files/$(REPO)/$(PLAT)-$(MODEL)/ openwrt/$(REPO)/files/
 endef
 
-define gen_config
+define make_config
 [ -d openwrt/$(REPO)/files/etc/config ] || mkdir openwrt/$(REPO)/files/etc/config
 ./makeconf $(MODEL) $(PLAT) batman   > openwrt/$(REPO)/files/etc/config/batman-adv
 ./makeconf $(MODEL) $(PLAT) wireless > openwrt/$(REPO)/files/etc/config/wireless
@@ -315,7 +313,7 @@ images/%: openwrt/$$(REPO)/.repo_access
 	./genconfig $(PLAT) > openwrt/$(REPO)/.config
 	-rm -r openwrt/$(REPO)/files 2> /dev/null || true
 	$(move_files)
-	$(gen_config)
+	$(make_config)
 	$(create_firmware_file)
 	$(brand_firmware)
 	$(oldconfig)
