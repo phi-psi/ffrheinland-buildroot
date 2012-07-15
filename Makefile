@@ -53,7 +53,6 @@ define gen_config
 endef
 
 define create_firmware_file
-#./name_firmware openwrt/$(REPO)
 echo $(DATE)_$$(echo $(VERSION) \
 	| sed -e "s/git-//g")_$(REPO)-`[[ "$(REPO)" == "trunk" ]] \
 	&& echo $(SVNREVISION) || echo $(BACKFIREVERSION)` \
@@ -112,7 +111,7 @@ info:
 	@echo "	    Date: $(FFJDATE)"
 	@echo ''
 	@echo "OpenWrt"
-	@echo "	Backfire: $(BACKFIREVERSION)"
+	@echo "	Backfire: No longer supported"
 	@echo "	   Trunk: r$(SVNREVISION)"
 	@echo ''
 	@echo ' To see a list of typical targets execute "make help"'
@@ -139,27 +138,7 @@ config/%.config:
 
 fetch: fetch-trunk
 
-fetch-backfire: openwrt/backfire/.repo_access
-
 fetch-trunk: openwrt/trunk/.repo_access
-
-.NOTPARALLEL:
-openwrt/backfire/.repo_access:
-	mkdir -p openwrt dl
-	@echo '  SVN 	  OpenWrt Backfire $(BACKFIREVERSION)'
-	svn co -q svn://svn.openwrt.org/openwrt/tags/backfire_$(BACKFIREVERSION)/ $(@D)
-	[[ -h $(@D)/dl ]] || ln -s ../../dl $(@D)/
-	@echo '  UPDATE  OpenWrt Backfire $(BACKFIREVERSION) feeds'
-	cat $(@D)/feeds.conf.default feeds.conf > $(@D)/feeds.conf
-	echo "src-link ffrl $$(pwd)/feeds/ffrl" >> $(@D)/feeds.conf
-	cd $(@D) && ./scripts/feeds update > /dev/null 2&>1
-	@echo '  INSTALL Freifunk Jena hbbpd $(FFJVERSION) in OpenWrt Backfire'
-	cd $(@D) && ./scripts/feeds install -a -p ffj > /dev/null 2&>1
-	@echo '  INSTALL Freifunk Rheinland packages in OpenWrt Trunk'
-	cd $(@D) && ./scripts/feeds install -a -p ffrl > /dev/null 2&>1
-	@echo '  LINK    OpenWrt Backfire $(BACKFIREVERSION) packages'
-	cd $(@D) && $(MAKE) $(MAKEFLAGS) package/symlinks
-	touch $@
 
 .NOTPARALLEL:
 openwrt/trunk/.repo_access:
@@ -192,30 +171,13 @@ settings_update:
 	sed -i -e 's/SVNREVISION	=.*/SVNREVISION	= $(newSVN)/g' settings.mk
 
 .NOTPARALLEL:
-update: update-backfire update-trunk
+update: update-trunk
 
 update-backfire: openwrt/backfire/.update
 
 .NOTPARALLEL:
 # update-trunk: settings_update
 update-trunk: openwrt/trunk/.update
-
-.NOTPARALLEL:
-openwrt/backfire/.update:
-	mkdir -p openwrt dl
-	@echo '  SVN 	  OpenWrt Backfire $(BACKFIREVERSION) (update)'
-	cd $(@D) && svn update -q
-	@echo '  UPDATE  OpenWrt Backfire $(BACKFIREVERSION) feeds'
-	cat $(@D)/feeds.conf.default feeds.conf > $(@D)/feeds.conf
-	echo "src-link ffrl $$(pwd)/feeds/ffrl" >> $(@D)/feeds.conf
-	cd $(@D) && ./scripts/feeds update > /dev/null 2&>1
-	@echo '  INSTALL Freifunk Jena hbbpd $(FFJVERSION) (update)'
-	cd $(@D) && ./scripts/feeds install -a -p ffj > /dev/null 2&>1
-	@echo '  INSTALL Freifunk Rheinland packages in OpenWrt Trunk'
-	cd $(@D) && ./scripts/feeds install -a -p ffrl > /dev/null 2&>1
-	@echo '  LINK    OpenWrt Backfire $(BACKFIREVERSION) packages'
-	cd $(@D) && $(MAKE) $(MAKEFLAGS) package/symlinks
-	touch $(@D).repo_access
 
 .NOTPARALLEL:
 openwrt/trunk/.update:
@@ -241,10 +203,7 @@ openwrt/trunk/.update:
 clean: 
 	-rm -r config/*.config image/*
 
-mrpropper: mrpropper-backfire mrpropper-trunk
-
-mrpropper-backfire:
-	cd openwrt/backfire && $(MAKE) clean
+mrpropper: mrpropper-trunk
 
 mrpropper-trunk:
 	cd openwrt/trunk && $(MAKE) clean
