@@ -16,8 +16,6 @@
 # You should have received a copy of the GNU General Public License along with
 # this program.  If not, see <http://www.gnu.org/licenses/>.
 
-version="0.0.20120618"
-
 version(){
 echo "makeconf v${version}"
 
@@ -49,195 +47,10 @@ EOF
 #list_com
 }
 
-# Konfigurierbare Freifunk-Zellen
-cells(){
-cells="ffrl ac d du kr j mg ne gmrv peg sg w"
-}
-
 # ------------------------------------------------------------------------------
 # Konfigurationsdaten der Freifunk-Zellen
 # ------------------------------------------------------------------------------
-cell_ffrl(){
-name="Rheinland"
-com='ffrl'
-channel=5
-batssid=FFRL-BATBONE
-bssid=02:CA:FF:EE:FF:FF
-subnet="10.0.0.0/16"
-ip6ula="fda0:747e:ab29:ff::/64"
-ssid1="www.freifunk-rheinland.net"
-n2n=none
-}
-
-cell_ac(){
-name="Aachen"
-com='ffac'
-channel=1
-batssid=FFAC-BATBONE
-bssid=12:ca:ff:ee:ba:be
-subnet="10.90.0.0/16"
-ip6ula="fda0:747e:ab29:ffac::/64"
-ssid1="www.freifunk-rheinland.net"
-n2n=ffrln2n1
-}
-
-cell_d(){
-name="Düsseldorf"
-com='ffddorf'
-channel=3
-batssid=batman.duesseldorf.freifunk.net
-bssid=02:CA:FF:EE:BA:BE
-subnet="10.40.0.0/16"
-ip6ula="fda0:747e:ab29:cafe::/64"
-ssid1="www.freifunk-rheinland.net"
-n2n=ffrln2n
-}
-
-cell_du(){
-name="Duisburg"
-com='ffduisburg'
-channel=1
-batssid=FFDU-BATBONE
-bssid=02:CA:FF:EE:02:03
-subnet="10.71.0.0/16"
-ip6ula="fda0:747e:ab29:203::/64"
-ssid1="www.freifunk-rheinland.net"
-n2n=ffrln2n
-}
-
-cell_kr(){
-name="Krefeld"
-com='ffkrefeld'
-channel=1
-batssid=batman.krefeld.freifunk.net
-bssid=12:CA:FF:EE:BA:BE
-subnet="10.41.0.0/16"
-ip6ula="fda0:747e:ab29:babe::/64"
-ssid1="www.freifunk-rheinland.net"
-n2n=ffrln2n
-}
-
-cell_j(){
-name="Jena"
-com='ffj'
-channel=1
-batssid=batman.freifunk-jena.de
-bssid=12:CA:FF:EE:BA:BE
-subnet="10.17.0.0/16"
-ip6ula="fda0:747e:ab29:ff1::/64"
-ssid1="www.freifunk-jena.de"
-n2n=ffrln2n
-}
-
-cell_mg(){
-name="Mönchengladbach"
-com='ffmgladbach'
-channel=1
-batssid=FFMG-BATBONE
-bssid=02:CA:FF:EE:21:61
-subnet="10.140.0.0/16"
-ip6ula="fda0:747e:ab29:2161::/64"
-ssid1="www.freifunk-rheinland.net"
-n2n=ffrln2n
-}
-
-cell_ne (){
-name="Neuss"
-com='ffneuss'
-channel=11
-batssid=batman.neuss.freifunk.net
-bssid=B2:CA:FF:EE:BA:BE
-subnet="10.28.0.0/16"
-ip6ula="fda0:747e:ab29:beef::/64"
-ssid1="www.freifunk-rheinland.net"
-n2n=ffrln2n
-}
-
-cell_gmrv(){
-name="Radevormwald (Oberbergischer Kreis)"
-com='ffrade'
-channel=1
-batssid=FFRV-BATBONE
-bssid=02:CA:FF:EE:21:95
-subnet="10.57.0.0/16"
-ip6ula="fda0:747e:ab29:2195::/64"
-ssid1="Freifunk Radevormwald"
-ssid2="www.freifunk-rheinland.net"
-n2n=ffrln2n1
-}
-
-cell_peg(){
-name="Pegnitz"
-com='ffpegde'
-channel=1
-batssid=batman.pegnitz.freifunk.net
-bssid=44:03:DE:AD:BE:EF
-subnet="44.3.0.0/16"
-ip6ula="fda0:747e:ab29:4403::/64"
-ssid1="pegnitz.freifunk.net"
-#ssid2="Freifunk Pegnitz"
-n2n=ffpegde
-}
-
-cell_sg(){
-name="Solingen"
-com='ffsolingen'
-channel=11
-batssid=batman.solingen.freifunk.net
-bssid=02:40:00:43:43:43
-subnet="10.7.0.0/16"
-ip6ula="fda0:747e:ab29:dead::/64"
-ssid1="www.freifunk-rheinland.net"
-n2n=ffrln2n
-}
-
-cell_w(){
-name="Wuppertal"
-com='ffwtal'
-channel=11
-batssid=FFW-BATBONE
-bssid=02:CA:FF:EE:E1:BA
-subnet="10.3.0.0/16"
-ip6ula="fda0:747e:ab29:e1ba::/64"
-ssid1="www.freifunk-wuppertal.net"
-ssid2="www.freifunk-rheinland.net"
-n2n=ffrln2n1
-}
-
-# ------------------------------------------------------------------------------
-# n2n Konfigurationsdaten 
-# ------------------------------------------------------------------------------
-n2n_ffrln2n(){
-amount='2'
-n2n1='fnordeingang.de'
-port1='31337'
-n2n2='78.47.181.173'
-port2='31337'
-}
-
-n2n_ffrln2n1(){
-amount='1'
-n2n1='fnordeingang.de'
-port1='31337'
-}
-
-n2n_ffpegde(){
-amount='1'
-n2n1='freifunk.f3l.de'
-port1='31337'
-}
-
-n2n_ffj(){
-amount='2'
-n2n1='fritz-der-server.de'
-port1='2009'
-n2n2='89.238.83.22'
-port2='9876'
-}
-
-n2n_none(){
-amount='0'
-}
+. com.conf
 
 # ------------------------------------------------------------------------------
 # ein paar Funktionen
@@ -363,7 +176,7 @@ config wifi-iface
 	option device 'radio0'
 	option network 'mesh'
 	option mode 'ap'
-	option ssid 'www.freifunk-rheinland.net'
+	option ssid '${ssid1}'
 	option encryption 'none'
 	option wmm '0'
 EOF
