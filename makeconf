@@ -270,6 +270,7 @@ cell_${cell} 2> /dev/null || defcell
 conf_${conf}
 }
 
+# TODO dies beseitigen und besser machen
 # Kompatibilitätsebene für FF-Buildroot
 defcell(){
 case "$cell" in
@@ -284,6 +285,9 @@ case "$cell" in
   ;;
   krefeld)
   cell=kr
+  ;;
+  mettmann)
+  cell=me
   ;;
   moenchengladbach)
   cell=mg
