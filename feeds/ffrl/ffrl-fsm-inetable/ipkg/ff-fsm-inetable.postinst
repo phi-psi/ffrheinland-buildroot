@@ -20,7 +20,7 @@ sed \
   -e "/\/tmp\/p2ptbl\/gwip/d" \
   -i "${IPKG_INSTROOT}/etc/crontabs/root"
 
-echo "*/2 * * * * /usr/sbin/fsm watch inetable
+echo "*/1 * * * * /usr/sbin/fsm watch inetable
 */1 * * * * /usr/sbin/p2ptbl gossip /tmp/p2ptbl/gwip      500 br-mesh
 * * * * */10 /usr/sbin/p2ptbl gossip /tmp/p2ptbl/ccfg_wifi 500 br-mesh
 */1 * * * * /usr/sbin/splash_sync" \
