@@ -1,0 +1,13 @@
+#!/bin/sh
+# post-removal script.
+
+echo "+ removing ffrl-n2n-watchdog from crontab"
+sed \
+  -e "/n2n_watchdog/d" \
+  -i "${IPKG_INSTROOT}/etc/crontabs/root"
+
+if [ -z "${IPKG_INSTROOT}" ]; then
+  echo "+ restarting cron"
+  /etc/init.d/cron restart
+fi
+
