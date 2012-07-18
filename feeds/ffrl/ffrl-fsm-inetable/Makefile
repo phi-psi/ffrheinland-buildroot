@@ -13,7 +13,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ffrl-fsm-inetable
-PKG_VERSION:=20120624
+PKG_VERSION:=20120718
 PKG_RELEASE:=1
 
 include $(INCLUDE_DIR)/package.mk
