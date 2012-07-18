@@ -13,7 +13,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ffrl-geolocate
-PKG_VERSION:=20120620
+PKG_VERSION:=20120718
 PKG_RELEASE:=1
 #PKG_REV:=0b39a826c379a2401dbae12a5dadbf0eff3c76ff
 
