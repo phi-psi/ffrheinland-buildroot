@@ -48,6 +48,7 @@ define make_config
 ./makeconf $(MODEL) $(PLAT) wireless > openwrt/$(REPO)/files/etc/config/wireless
 ./makeconf $(MODEL) $(PLAT) n2n      > openwrt/$(REPO)/files/etc/config/n2n
 ./makeconf $(MODEL) $(PLAT) cloud    > openwrt/$(REPO)/files/etc/config/cloud
+./makeconf $(MODEL) $(PLAT) shadow   > openwrt/$(REPO)/files/etc/shadow
 endef
 
 define create_firmware_file
