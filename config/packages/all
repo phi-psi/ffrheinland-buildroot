@@ -1,2 +1,19 @@
+ffrl-fsm	ffrl
+ffrl-fsm-inetable	ffrl
+ffrl-fsm-update	ffrl
+ffrl-geolocate	ffrl
+ffrl-n2n-watchdog	ffrl
+ffrl-p2ptbl	ffrl
+ffrl-shuf	ffrl
+ffrl-splash	ffrl
+
+ffrl-distnodeinfo	ffrlgit
+#ffrl-fsm	ffrlgit
+#ffrl-geolocate	ffrlgit
+ffrl-key-lcb	ffrlgit
+ffrl-key-phip	ffrlgit
 ffrl-nodeconfig	ffrlgit
+#ffrl-p2ptbl	ffrlgit
+#ffrl-shuf	ffrlgit
+#ffrl-splash	ffrlgit
 
