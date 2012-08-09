@@ -307,6 +307,7 @@ CONFIG_PACKAGE_ffrl-geolocate=
 CONFIG_PACKAGE_ffrl-p2ptbl=
 CONFIG_PACKAGE_ffrl-shuf=
 CONFIG_PACKAGE_ffrl-splash=
+CONFIG_PACKAGE_ffrl-n2n-watchdog=
 EOF
 }
 
