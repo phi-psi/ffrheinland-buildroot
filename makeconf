@@ -314,6 +314,9 @@ case "$cell" in
   solingen)
   cell=sg
   ;;
+  wermelskirchen)
+  cell=gl
+  ;;
   wuppertal)
   cell=w
   ;;
@@ -331,7 +334,7 @@ case "$cell" in
   ;;
 esac
 
-cell_${cell} || defcell
+cell_${cell} 2> /dev/null
 }
 
 # Eingabeverarbeitung
